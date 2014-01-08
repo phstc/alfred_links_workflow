@@ -29,7 +29,7 @@
 	<key>createdby</key>
 	<string>Pablo Cantero</string>
 	<key>description</key>
-	<string>Links</string>
+	<string>Search Links, Open URL, Copy to Clipboard</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -60,41 +60,17 @@
 				<integer>62</integer>
 				<key>keyword</key>
 				<string>links</string>
+				<key>runningsubtext</key>
+				<string>...</string>
 				<key>script</key>
-				<string>LINKS = {
-  'Pablo'  =&gt;   'http://pablocantero.com',
-  'GitHub' =&gt;   'http://github.com/phstc'
-}
-
-query = '{query}'.strip.downcase
-
-if query == ''
-  selected = LINKS
-else
-  selected = LINKS.reject do |name, link|
-    name.to_s.downcase.index(query).nil?
-  end
-end
-
-output = %{&lt;?xml version="1.0"?&gt;&lt;items&gt;}
-
-selected.each do |name, link|
-  output += %{
-  &lt;item uid="#{name}" arg="#{link}" autocomplete="#{name}"&gt;
-    &lt;title&gt;#{name}&lt;/title&gt;
-  &lt;icon&gt;link.png&lt;/icon&gt;
-  &lt;/item&gt;
-  }
-end
-
-output += "&lt;/items&gt;"
-
-puts output
+				<string>/usr/bin/ruby ./main.rb {query}
 </string>
+				<key>subtext</key>
+				<string>Search links for {query}</string>
 				<key>title</key>
-				<string>links</string>
+				<string>links {query}</string>
 				<key>type</key>
-				<integer>2</integer>
+				<integer>0</integer>
 				<key>withspace</key>
 				<true/>
 			</dict>
