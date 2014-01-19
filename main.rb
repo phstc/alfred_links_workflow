@@ -1,23 +1,25 @@
-LINKS = {
-  'Pablo'  =>   'http://pablocantero.com',
-  'GitHub' =>   'http://github.com/phstc'
-}
+require 'json'
 
 query = ARGV.join(' ').strip.downcase
 
-if query == ''
-  selected = LINKS
-else
-  selected = LINKS.reject do |name, link|
+links = JSON.parse(File.read('links.json'))['links']
+
+if query != ''
+  links.reject! do |link|
+    name = link['name']
+
     name.to_s.downcase.index(query).nil?
   end
 end
 
 output = %{<?xml version="1.0"?><items>}
 
-selected.each do |name, link|
+links.each do  |link|
+  name = link['name']
+  href = link['href']
+
   output += %{
-  <item uid="#{name}" arg="#{link}" autocomplete="#{name}">
+  <item uid="#{name}" arg="#{href}" autocomplete="#{name}">
     <title>#{name}</title>
   <icon>link.png</icon>
   </item>
