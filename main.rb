@@ -21,6 +21,7 @@ links.each do  |link|
   output += %{
   <item uid="#{name}" arg="#{href}" autocomplete="#{name}">
     <title>#{name}</title>
+    <subtitle>#{href}</subtitle>
   <icon>link.png</icon>
   </item>
   }
