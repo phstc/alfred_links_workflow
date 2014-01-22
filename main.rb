@@ -12,6 +12,7 @@ if query != ''
   end
 end
 
+# http://www.alfredforum.com/topic/5-generating-feedback-in-workflows/
 output = %{<?xml version="1.0"?><items>}
 
 links.each do  |link|
