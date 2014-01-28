@@ -8,7 +8,7 @@ if query != ''
   links.reject! do |link|
     name = link['name']
 
-    name.to_s.downcase.index(query).nil?
+    name.to_s.downcase.include?(query)
   end
 end
 
