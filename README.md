@@ -2,10 +2,6 @@
 
 It is a basic [Alfred Workflow](http://www.alfredapp.com/powerpack/) to list/search links. 
 
-Although there are some workflows to integrate with Browser Bookmarks, I find them over complicated for my basic needs.
-
-In all the companies I've worked, we had some "Company Links" which I needed to access on a daily basis. So now I use this workflow to quickly access them.
-
 
 ## Installation instructions
 
