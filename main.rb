@@ -2,7 +2,7 @@ require 'json'
 
 query = ARGV.join(' ').strip.downcase
 
-links = JSON.parse(File.read('./links.json'))['links']
+links = JSON.parse(File.read("links.json", :encoding => "UTF-8"))["links"]
 
 if query != ''
   links.reject! do |link|
