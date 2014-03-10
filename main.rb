@@ -1,4 +1,5 @@
 require 'json'
+require 'cgi'
 
 query = ARGV.join(' ').strip.downcase
 
@@ -16,8 +17,8 @@ end
 output = %{<?xml version="1.0"?><items>}
 
 links.each do  |link|
-  name = link['name']
-  href = link['href']
+  name = CGI.escapeHTML(link['name'])
+  href = CGI.escapeHTML(link['href'])
 
   output += %{
   <item uid="#{name}" arg="#{href}" autocomplete="#{name}">
