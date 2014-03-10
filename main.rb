@@ -6,7 +6,7 @@ query = ARGV.join(' ').strip.downcase
 links = JSON.parse(File.read("links.json", :encoding => "UTF-8"))["links"]
 
 if query != ''
-  links.reject! do |link|
+  links.select! do |link|
     name = link['name']
 
     name.to_s.downcase.include?(query)
