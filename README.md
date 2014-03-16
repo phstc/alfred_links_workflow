@@ -1,6 +1,6 @@
 # Alfred Links Workflow
 
-It is a basic [Alfred Workflow](http://www.alfredapp.com/powerpack/) to list/search links. 
+It is an [Alfred Workflow](http://www.alfredapp.com/powerpack/) to list/search links.
 
 
 ## Installation instructions
