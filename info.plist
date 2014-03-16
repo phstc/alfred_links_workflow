@@ -4,6 +4,8 @@
 <dict>
 	<key>bundleid</key>
 	<string>com.pablocantero.links</string>
+	<key>category</key>
+	<string>Tools</string>
 	<key>connections</key>
 	<dict>
 		<key>6C68D0BB-A89A-4FDD-BB99-B5A5B460646E</key>
@@ -120,6 +122,6 @@
 		</dict>
 	</dict>
 	<key>webaddress</key>
-	<string>pablocantero.com</string>
+	<string>https://github.com/phstc/alfred_links_workflow</string>
 </dict>
 </plist>
