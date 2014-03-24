@@ -12,6 +12,12 @@ end
 
 bundleID = `/usr/libexec/PlistBuddy  -c "Print :bundleid" "info.plist"`.strip
 dataDir = "#{Dir.home()}/Library/Application Support/Alfred 2/Workflow Data/#{bundleID}"
+
+if ! File.directory?(dataDir)
+	Dir.mkdir(dataDir)
+	`cp ./links.json "#{dataDir}/"`
+end
+
 query = ARGV.join(' ').strip
 
 links = JSON.parse(File.read("#{dataDir}/links.json"))
