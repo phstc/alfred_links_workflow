@@ -272,8 +272,10 @@ getDataDir() {
 
 if [ ! -d "$(getDataDir)" ]; then
    mkdir -p "$(getDataDir)";
-   touch "$(getDataDir)/notesDir.txt";
    touch "$(getDataDir)/Editor.txt";
+   if [ ! -f "$(getDataDir)/links.json" ]; then
+      cp ./links.json "$(getDataDir)/links.json";
+   fi
 fi
 
 # Set the notes directory name.
@@ -322,14 +324,13 @@ getDataDir() {
 
 if [ ! -d "$(getDataDir)" ]; then
    mkdir -p "$(getDataDir)";
-   touch "$(getDataDir)/notesDir.txt";
    touch "$(getDataDir)/Editor.txt";
 fi
 
 # Set the notes directory name.
 editor=`cat "$(getDataDir)/Editor.txt"`;
 
-/usr/bin/open -a "$editor" "./links.json";
+/usr/bin/open -a "$editor" "$(getDataDir)/links.json";
 
 # Tell the user.
 echo "Editing the links file.";

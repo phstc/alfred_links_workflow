@@ -1,12 +1,13 @@
 require 'json'
-require 'cgi'
 
+bundleID = `/usr/libexec/PlistBuddy  -c "Print :bundleid" "info.plist"`.strip
+dataDir = "#{Dir.home()}/Library/Application Support/Alfred 2/Workflow Data/#{bundleID}"
 query = ARGV.join(' ').strip.downcase
 
-links = JSON.parse(File.read("links.json", :encoding => "UTF-8"))["links"]
+links = JSON.parse(File.read("#{dataDir}/links.json"))['links']
 
 if query != ''
-  links.select! do |link|
+  links.reject! do |link|
     name = link['name']
 
     name.to_s.downcase.include?(query)
@@ -17,8 +18,8 @@ end
 output = %{<?xml version="1.0"?><items>}
 
 links.each do  |link|
-  name = CGI.escapeHTML(link['name'])
-  href = CGI.escapeHTML(link['href'])
+  name = link['name']
+  href = link['href']
 
   output += %{
   <item uid="#{name}" arg="#{href}" autocomplete="#{name}">
