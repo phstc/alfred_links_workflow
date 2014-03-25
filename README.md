@@ -25,8 +25,17 @@ It is an [Alfred Workflow](http://www.alfredapp.com/powerpack/) to list/search l
 
 ## Usage
 
+###Using the "links " keyword:
 * Click in the link name to open it in your default browser.
 * Hold CMD and click to copy the link to Clipboard.
+* Press fn key to delete a link
+* Type a new name and it will show it as a new link name. Press Enter and it will ask for the address with the "http:/" already in place. Press enter and it will add the new link to the list and show the link name and address. If Enter is pressed again, it will open that new link.
+
+###Using the "links:seteditor" keyword:
+* Start typing the name of your editor. When it is display in the list, select it and press Enter. You can now use the keyword to directly edit your link list.
+
+###Using the "links:edit" keyword:
+* After setting your editor, this keyword will open the list of links into the editor you selected.
 
 
 ![links workflow](https://raw.github.com/phstc/alfred_links_workflow/master/usage1.png)

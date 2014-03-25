@@ -37,6 +37,14 @@
 				<key>modifiersubtext</key>
 				<string></string>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>FE76746C-AA13-407A-B346-AFCF67A3A3F6</string>
+				<key>modifiers</key>
+				<integer>8388608</integer>
+				<key>modifiersubtext</key>
+				<string>Delete the Link</string>
+			</dict>
 		</array>
 		<key>93856DA4-2B16-47FB-8A5C-03C638E115FE</key>
 		<array>
@@ -65,6 +73,17 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>93856DA4-2B16-47FB-8A5C-03C638E115FE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+		<key>FE76746C-AA13-407A-B346-AFCF67A3A3F6</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>7551861C-8EAC-4E78-B9AB-D961264E9B28</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -141,6 +160,51 @@
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>7429AAA0-7E9A-48D4-B62F-78BD7D6055EC</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string>require 'json'
+
+address = "{query}".strip
+
+bundleID = `/usr/libexec/PlistBuddy  -c "Print :bundleid" "info.plist"`.strip
+dataDir = "#{Dir.home()}/Library/Application Support/Alfred 2/Workflow Data/#{bundleID}"
+
+if ! File.directory?(dataDir)
+	Dir.mkdir(dataDir)
+	`cp ./links.json "#{dataDir}/"`
+end
+
+links = JSON.parse(File.read("#{dataDir}/links.json"))
+
+nlinks = {}
+nlinks["links"] = Array.new
+
+links["links"].each do |link|
+	if link["href"] != address
+		nlink = {}
+		nlink["name"] = link["name"]
+		nlink["href"] = link["href"]
+		nlinks["links"].push(nlink)
+	end
+end
+
+File.write("#{dataDir}/links.json",nlinks.to_json)
+
+puts "The link #{address} has been removed."</string>
+				<key>type</key>
+				<integer>2</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>FE76746C-AA13-407A-B346-AFCF67A3A3F6</string>
 			<key>version</key>
 			<integer>0</integer>
 		</dict>
@@ -248,9 +312,10 @@ getDataDir() {
 if [ ! -d "$(getDataDir)" ]; then
    mkdir -p "$(getDataDir)";
    touch "$(getDataDir)/Editor.txt";
-   if [ ! -f "$(getDataDir)/links.json" ]; then
-      cp ./links.json "$(getDataDir)/links.json";
-   fi
+fi
+
+if [ ! -f "$(getDataDir)/links.json" ]; then
+   cp ./links.json "$(getDataDir)/links.json";
 fi
 
 # Set the notes directory name.
@@ -327,6 +392,11 @@ if [ ! -d "$(getDataDir)" ]; then
    touch "$(getDataDir)/Editor.txt";
 fi
 
+
+if [ ! -f "$(getDataDir)/links.json" ]; then
+   cp ./links.json "$(getDataDir)/links.json";
+fi
+
 # Set the notes directory name.
 editor=`cat "$(getDataDir)/Editor.txt"`;
 
@@ -374,7 +444,7 @@ echo "Editing the links file.";
 		<key>089C312A-0D8D-49AB-A908-2236E115B0F4</key>
 		<dict>
 			<key>ypos</key>
-			<real>200</real>
+			<real>320</real>
 		</dict>
 		<key>6C68D0BB-A89A-4FDD-BB99-B5A5B460646E</key>
 		<dict>
@@ -394,22 +464,27 @@ echo "Editing the links file.";
 		<key>7551861C-8EAC-4E78-B9AB-D961264E9B28</key>
 		<dict>
 			<key>ypos</key>
-			<real>270</real>
+			<real>370</real>
 		</dict>
 		<key>93856DA4-2B16-47FB-8A5C-03C638E115FE</key>
 		<dict>
 			<key>ypos</key>
-			<real>330</real>
+			<real>450</real>
 		</dict>
 		<key>C6C4B326-83D5-419B-B361-910AD83A033D</key>
 		<dict>
 			<key>ypos</key>
-			<real>200</real>
+			<real>320</real>
 		</dict>
 		<key>E0E7AED6-F79B-4D2B-B10E-49EF5DE051A9</key>
 		<dict>
 			<key>ypos</key>
-			<real>330</real>
+			<real>450</real>
+		</dict>
+		<key>FE76746C-AA13-407A-B346-AFCF67A3A3F6</key>
+		<dict>
+			<key>ypos</key>
+			<real>200</real>
 		</dict>
 	</dict>
 	<key>webaddress</key>
