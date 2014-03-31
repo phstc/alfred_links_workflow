@@ -8,17 +8,6 @@
 	<string>Internet</string>
 	<key>connections</key>
 	<dict>
-		<key>089C312A-0D8D-49AB-A908-2236E115B0F4</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>7551861C-8EAC-4E78-B9AB-D961264E9B28</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-			</dict>
-		</array>
 		<key>6C68D0BB-A89A-4FDD-BB99-B5A5B460646E</key>
 		<array>
 			<dict>
@@ -44,39 +33,6 @@
 				<integer>8388608</integer>
 				<key>modifiersubtext</key>
 				<string>Delete the Link</string>
-			</dict>
-		</array>
-		<key>93856DA4-2B16-47FB-8A5C-03C638E115FE</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>7551861C-8EAC-4E78-B9AB-D961264E9B28</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-			</dict>
-		</array>
-		<key>C6C4B326-83D5-419B-B361-910AD83A033D</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>089C312A-0D8D-49AB-A908-2236E115B0F4</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-			</dict>
-		</array>
-		<key>E0E7AED6-F79B-4D2B-B10E-49EF5DE051A9</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>93856DA4-2B16-47FB-8A5C-03C638E115FE</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
 			</dict>
 		</array>
 		<key>FE76746C-AA13-407A-B346-AFCF67A3A3F6</key>
@@ -169,168 +125,14 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>script</key>
-				<string>require 'json'
-
-address = "{query}".strip
-
-bundleID = `/usr/libexec/PlistBuddy  -c "Print :bundleid" "info.plist"`.strip
-dataDir = "#{Dir.home()}/Library/Application Support/Alfred 2/Workflow Data/#{bundleID}"
-
-if ! File.directory?(dataDir)
-	Dir.mkdir(dataDir)
-	`cp ./links.json "#{dataDir}/"`
-end
-
-links = JSON.parse(File.read("#{dataDir}/links.json"))
-
-nlinks = {}
-nlinks["links"] = Array.new
-
-links["links"].each do |link|
-	if link["href"] != address
-		nlink = {}
-		nlink["name"] = link["name"]
-		nlink["href"] = link["href"]
-		nlinks["links"].push(nlink)
-	end
-end
-
-File.write("#{dataDir}/links.json",nlinks.to_json)
-
-puts "The link #{address} has been removed."</string>
+				<string>echo `/usr/bin/ruby delete.rb "{query}"`;</string>
 				<key>type</key>
-				<integer>2</integer>
+				<integer>0</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>FE76746C-AA13-407A-B346-AFCF67A3A3F6</string>
-			<key>version</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>anchorfields</key>
-				<true/>
-				<key>daterange</key>
-				<integer>0</integer>
-				<key>fields</key>
-				<array>
-					<dict>
-						<key>field</key>
-						<string>kMDItemDisplayName</string>
-						<key>not</key>
-						<false/>
-						<key>split</key>
-						<true/>
-						<key>value</key>
-						<string>{query}</string>
-						<key>words</key>
-						<true/>
-					</dict>
-					<dict>
-						<key>field</key>
-						<string>kMDItemAlternateNames</string>
-						<key>not</key>
-						<false/>
-						<key>split</key>
-						<true/>
-						<key>value</key>
-						<string>{query}</string>
-						<key>words</key>
-						<true/>
-					</dict>
-					<dict>
-						<key>field</key>
-						<string>kMDItemFinderComment</string>
-						<key>not</key>
-						<false/>
-						<key>split</key>
-						<true/>
-						<key>value</key>
-						<string>{query}</string>
-						<key>words</key>
-						<true/>
-					</dict>
-				</array>
-				<key>includesystem</key>
-				<false/>
-				<key>keyword</key>
-				<string>links:seteditor</string>
-				<key>scopes</key>
-				<array>
-					<string>/Applications</string>
-					<string>~/Applications</string>
-				</array>
-				<key>subtext</key>
-				<string>Links</string>
-				<key>title</key>
-				<string>Set Editor</string>
-				<key>types</key>
-				<array>
-					<string>com.apple.application-bundle</string>
-				</array>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.filefilter</string>
-			<key>uid</key>
-			<string>C6C4B326-83D5-419B-B361-910AD83A033D</string>
-			<key>version</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string>
-#########################
-# Contants.
-#########################
-VPREFS="${HOME}/Library/Caches/com.runningwithcrayons.Alfred-2/Workflow Data/"
-NVPREFS="${HOME}/Library/Application Support/Alfred 2/Workflow Data/"
-
-###############################################################################
-# Read the bundleid from the workflow's info.plist
-###############################################################################
-getBundleId() {
-  /usr/libexec/PlistBuddy  -c "Print :bundleid" "info.plist"
-}
-
-###############################################################################
-# Get the workflow data dir
-###############################################################################
-getDataDir() {
-  local BUNDLEID=$(getBundleId)
-  echo "${NVPREFS}${BUNDLEID}"
-}
-
-if [ ! -d "$(getDataDir)" ]; then
-   mkdir -p "$(getDataDir)";
-   touch "$(getDataDir)/Editor.txt";
-fi
-
-if [ ! -f "$(getDataDir)/links.json" ]; then
-   cp ./links.json "$(getDataDir)/links.json";
-fi
-
-# Set the notes directory name.
-echo "{query}" &gt; "$(getDataDir)/Editor.txt";
-
-# Tell the user.
-echo "The editor that will be used: {query}";
-</string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>089C312A-0D8D-49AB-A908-2236E115B0F4</string>
 			<key>version</key>
 			<integer>0</integer>
 		</dict>
@@ -359,93 +161,11 @@ echo "The editor that will be used: {query}";
 			<key>version</key>
 			<integer>0</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>escaping</key>
-				<integer>127</integer>
-				<key>script</key>
-				<string>
-#########################
-# Contants.
-#########################
-VPREFS="${HOME}/Library/Caches/com.runningwithcrayons.Alfred-2/Workflow Data/"
-NVPREFS="${HOME}/Library/Application Support/Alfred 2/Workflow Data/"
-
-###############################################################################
-# Read the bundleid from the workflow's info.plist
-###############################################################################
-getBundleId() {
-  /usr/libexec/PlistBuddy  -c "Print :bundleid" "info.plist"
-}
-
-###############################################################################
-# Get the workflow data dir
-###############################################################################
-getDataDir() {
-  local BUNDLEID=$(getBundleId)
-  echo "${NVPREFS}${BUNDLEID}"
-}
-
-if [ ! -d "$(getDataDir)" ]; then
-   mkdir -p "$(getDataDir)";
-   touch "$(getDataDir)/Editor.txt";
-fi
-
-
-if [ ! -f "$(getDataDir)/links.json" ]; then
-   cp ./links.json "$(getDataDir)/links.json";
-fi
-
-# Set the notes directory name.
-editor=`cat "$(getDataDir)/Editor.txt"`;
-
-/usr/bin/open -a "$editor" "$(getDataDir)/links.json";
-
-# Tell the user.
-echo "Editing the links file.";
-</string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>93856DA4-2B16-47FB-8A5C-03C638E115FE</string>
-			<key>version</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>links:edit</string>
-				<key>subtext</key>
-				<string>Links</string>
-				<key>text</key>
-				<string>Edit Links File</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>E0E7AED6-F79B-4D2B-B10E-49EF5DE051A9</string>
-			<key>version</key>
-			<integer>0</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
 	<key>uidata</key>
 	<dict>
-		<key>089C312A-0D8D-49AB-A908-2236E115B0F4</key>
-		<dict>
-			<key>ypos</key>
-			<real>320</real>
-		</dict>
 		<key>6C68D0BB-A89A-4FDD-BB99-B5A5B460646E</key>
 		<dict>
 			<key>ypos</key>
@@ -464,22 +184,7 @@ echo "Editing the links file.";
 		<key>7551861C-8EAC-4E78-B9AB-D961264E9B28</key>
 		<dict>
 			<key>ypos</key>
-			<real>370</real>
-		</dict>
-		<key>93856DA4-2B16-47FB-8A5C-03C638E115FE</key>
-		<dict>
-			<key>ypos</key>
-			<real>450</real>
-		</dict>
-		<key>C6C4B326-83D5-419B-B361-910AD83A033D</key>
-		<dict>
-			<key>ypos</key>
-			<real>320</real>
-		</dict>
-		<key>E0E7AED6-F79B-4D2B-B10E-49EF5DE051A9</key>
-		<dict>
-			<key>ypos</key>
-			<real>450</real>
+			<real>200</real>
 		</dict>
 		<key>FE76746C-AA13-407A-B346-AFCF67A3A3F6</key>
 		<dict>
