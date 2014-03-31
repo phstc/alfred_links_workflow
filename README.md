@@ -1,6 +1,6 @@
 # Alfred Links Workflow
 
-It is an [Alfred Workflow](http://www.alfredapp.com/powerpack/) to list/search links.
+It is a basic [Alfred Workflow](http://www.alfredapp.com/powerpack/) to list/search links.
 
 
 ## Installation instructions
@@ -25,8 +25,10 @@ It is an [Alfred Workflow](http://www.alfredapp.com/powerpack/) to list/search l
 
 ## Usage
 
-* Click in the link name to open it in your default browser.
+* Click in the link name to open it in your default browser. Typing the name will shorten the list to just the ones that match.
 * Hold CMD and click to copy the link to Clipboard.
+* Type in a name that does not exist and it will walk you through creating a new link.
+* Hold fn key and click the link to delete it.
 
 
 ![links workflow](https://raw.github.com/phstc/alfred_links_workflow/master/usage1.png)
