@@ -4,8 +4,6 @@
 <dict>
 	<key>bundleid</key>
 	<string>com.pablocantero.links</string>
-	<key>category</key>
-	<string>Tools</string>
 	<key>connections</key>
 	<dict>
 		<key>6C68D0BB-A89A-4FDD-BB99-B5A5B460646E</key>
@@ -21,6 +19,17 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>7429AAA0-7E9A-48D4-B62F-78BD7D6055EC</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+		<key>80B25A1F-C996-4481-AC14-9119FBEA5AD1</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>BCFF9BDA-FC40-4A07-8C1B-40E9BD8CA98D</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -100,6 +109,44 @@
 			<key>version</key>
 			<integer>0</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>links:edit</string>
+				<key>subtext</key>
+				<string>Open the Links File for edition</string>
+				<key>text</key>
+				<string>Edit Links File</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>80B25A1F-C996-4481-AC14-9119FBEA5AD1</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>script</key>
+				<string>/usr/bin/open "./links.json"</string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>BCFF9BDA-FC40-4A07-8C1B-40E9BD8CA98D</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -118,7 +165,17 @@
 		<key>7429AAA0-7E9A-48D4-B62F-78BD7D6055EC</key>
 		<dict>
 			<key>ypos</key>
-			<real>200</real>
+			<real>160</real>
+		</dict>
+		<key>80B25A1F-C996-4481-AC14-9119FBEA5AD1</key>
+		<dict>
+			<key>ypos</key>
+			<real>330</real>
+		</dict>
+		<key>BCFF9BDA-FC40-4A07-8C1B-40E9BD8CA98D</key>
+		<dict>
+			<key>ypos</key>
+			<real>330</real>
 		</dict>
 	</dict>
 	<key>webaddress</key>
